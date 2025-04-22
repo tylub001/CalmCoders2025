@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Karla";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./fonts/Karla-Regular.ttf") format("truetype");
+  }
+  
+  
+
+  @font-face {
+    font-family: "Tangerine";
+    font-style: normal;
+    font-weight: 400;
+    src: url("./fonts/Tangerine-Regular.ttf") format("truetype");
+  }

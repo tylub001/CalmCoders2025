@@ -1,0 +1,14 @@
+@import url(./vendor/fonts.css);
+@import url(./blocks/header.css);
+@import url(./blocks/about.css);
+@import url(./blocks/listen.css);
+@import url(./blocks/team.css);
+@import url(./blocks/footer.css);
+@import url(./blocks/guided.css);
+
+
+body {
+    font-family: "Karla", "Helvetica Neue", sans-serif;
+
+}
+

@@ -1,0 +1,141 @@
+/* --------------Our Team------------- */
+
+.our__team {
+    position: relative; /* Add this so ::before behaves properly */
+    min-height: 80vh; 
+    width: 100%; 
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+   
+  }
+  
+  .our__team::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/orand.jpg);
+    background-size: cover; 
+    background-position: center; 
+    opacity: 0.4;
+    z-index: -1;
+  }
+  .our__team h2 {
+    font-size: 4.5rem;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+  }
+  
+  .team__container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    align-items: center;
+    min-height: auto;
+    padding-bottom: 20px;
+    
+  }
+  
+  .team-member {
+    width: 140px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10%;
+   border: 1px solid black;
+    margin-top: 4px;
+  }
+  
+  .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 2px 0 10px;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .name__bio {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    font-family: "Inter", sans-serif;
+    color: #2a1e1e;
+    margin-top: 2px;
+    
+  }
+  
+  .team__card {
+   border: none;
+    border-radius: 0.9rem;
+    background-color: #cececbbb;
+    color: #000;
+    height: 370px;
+    width: 300px;
+    overflow-y: scroll;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+    padding-top: 10px;
+  }
+  
+  @media screen and (max-width: 1200px) {
+    .team__card {
+      height: 370px;
+      width: 250px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .team__card {
+      height: 370px;
+      width: 90%;
+    }
+  
+    .our__team h2 {
+      font-size: 2.5em;
+      height: 15vh;
+    }
+  }
+  
+  .team__card::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .bio-info {
+    line-height: 1rem;
+    text-wrap: auto;
+    font-size: 13px;
+    font-family: "Inter", sans-serif;
+    margin: 4px;
+    padding: 10px;
+    text-align: justify;
+    text-indent: 20px;
+    cursor: pointer;
+  }
+  
+  .btn__connect {
+    width: 85px;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    display: block;
+    margin: 25px auto;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    background-color: blue;
+    box-shadow: inset 2px 2px 8px rgba(255, 255, 255, 0.5);
+    color: #fff;
+    cursor: pointer;
+    transition-duration: 0.4s;
+  }
+  
+  .btn__connect:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
