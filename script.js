@@ -46,19 +46,19 @@ const breathingPatterns = {
     inhale: 4000,
     hold: 4000,
     exhale: 4000,
-    messages: ["Breathe In", "Hold", "Breathe Out"],
+    messages: ["In Hale", "Hold", "Exhale"],
   },
   balanced: {
-    inhale: 5000,
-    hold: 5000,
-    exhale: 5000,
-    messages: ["Breathe In", "Hold", "Breathe Out"],
-  },
-  relax: {
     inhale: 4000,
     hold: 7000,
     exhale: 8000,
-    messages: ["Breathe In", "Hold", "Breathe Out"],
+    messages: ["In Hale", "Hold", "Exhale"],
+  },
+  relax: {
+    inhale: 6000,
+    hold: 2000,
+    exhale: 7000,
+    messages: ["In Hale", "Hold", "Exhale"],
   },
 };
 
@@ -69,11 +69,14 @@ let animationInterval;
 let selectedDuration = 60000;
 let activeTimeout = null; 
 let isRunning = false; 
+let countdownTimeouts = [];
+let modeTextTimeout;
+let autoStopTimeout;
 
-document.addEventListener("DOMContentLoaded", function () {
-  const circle = document.querySelector(".breathing-circle");
-  circle.textContent = "Choose a Mode";
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   const circle = document.querySelector(".breathing-circle");
+//   circle.textContent = "Choose a Mode";
+// });
 
 function updateBreathing() {
   const circle = document.querySelector(".breathing-circle");
@@ -95,21 +98,42 @@ function updateBreathing() {
   }
 }
 
- function startBreathingCycle() {
-   isRunning = true;
-   currentPhase = 0;
-   if (exerciseTimer) {
-     clearTimeout(exerciseTimer);
-   }
+function startBreathingCycle() {
+  clearTimeout(modeTextTimeout);
+  clearTimeout(autoStopTimeout); 
 
-   exerciseTimer = setTimeout(() => {
-     stopBreathingCycle();
-     const circle = document.querySelector(".breathing-circle");
-     circle.textContent = "Session Complete";
-   }, selectedDuration * 1000);
+  autoStopTimeout = setTimeout(() => {
+    stopBreathingCycle();
+    const circle = document.querySelector(".breathing-circle");
+    circle.textContent = "Session timed out";
+  }, 360000); 
 
-   runPhase();
- }
+  const circle = document.querySelector(".breathing-circle");
+  circle.setAttribute("data-countdown", "true");
+  circle.textContent = "3";
+  countdownTimeouts.push(
+    setTimeout(() => {
+      circle.textContent = "2";
+      countdownTimeouts.push(
+        setTimeout(() => {
+          circle.textContent = "1";
+          countdownTimeouts.push(
+            setTimeout(() => {
+              circle.removeAttribute("data-countdown");
+              isRunning = true;
+              currentPhase = 0;
+              exerciseTimer = setTimeout(() => {
+                stopBreathingCycle();
+                circle.textContent = "Session Complete";
+              }, selectedDuration * 1000);
+              runPhase();
+            }, 1000)
+          );
+        }, 1000)
+      );
+    }, 1000)
+  );
+}
 
  function runPhase() {
    if (!isRunning) return;
@@ -149,10 +173,18 @@ durationButtons.forEach((button) => {
   });
 });
 
+const stopButton = document.querySelector('[onclick="stopBreathingCycle()"]');
+stopButton.addEventListener("click", () => {
+
+  stopBreathingCycle();
+});
+
 function stopBreathingCycle() {
+  clearTimeout(modeTextTimeout);
+  clearTimeout(autoStopTimeout); 
+
   const circle = document.querySelector(".breathing-circle");
 
-  
   if (exerciseTimer) {
     clearTimeout(exerciseTimer);
   }
@@ -160,16 +192,25 @@ function stopBreathingCycle() {
     clearTimeout(activeTimeout);
   }
 
-  
+  countdownTimeouts.forEach((timeout) => clearTimeout(timeout));
+  countdownTimeouts = [];
+
+  circle.removeAttribute("data-countdown");
+
   isRunning = false;
   currentPhase = 0;
-
 
   circle.classList.remove("blinking");
   circle.classList.remove("inhale");
   circle.classList.remove("exhale");
   circle.classList.remove("hold");
 
-  
-  circle.textContent = "Choose a Mode";
+  circle.style.transform = "scale(1)";
+  circle.style.transition = "transform 500ms ease-out";
+
+  circle.textContent = "BreatheWell";
+
+  modeTextTimeout = setTimeout(() => {
+    circle.textContent = "Choose a Mode";
+  }, 5000);
 }

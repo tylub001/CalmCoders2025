@@ -81,7 +81,7 @@
     position: relative;
     display: inline-block;
     width: fit-content;
-    cursor: pointer; /* Ensures it only fits the iframe */
+    cursor: pointer; 
   }
   
   .click-overlay {
@@ -90,7 +90,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Allows clicks to pass through */
+    pointer-events: none; 
   }
   
   .listen__iframe:hover {
