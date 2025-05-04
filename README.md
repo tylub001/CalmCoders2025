@@ -61,3 +61,7 @@ To run this project on your local machine:
 ![Images](./readme-images/breathing.png)
 ![Images](./readme-images/teamfoooter.png)
 ![Images](./readme-images/figmadesign.png)
+
+
+## Project Demo
+[Loom Link](https://www.loom.com/share/0b0a6352640641ac8eda0548268f64e5?sid=a8ab7a9a-444f-4922-a5a6-36f790a282d7)
