@@ -24,6 +24,8 @@ const quotes = [
   '"When meditation is mastered, the mind is unwavering like the flame of a candle in a windless place." – Bhagavad Gita',
 
   '"Meditation is not a way of making your mind quiet. It is a way of entering into the quiet that is already there." – Deepak Chopra',
+
+  '"May the force be with you"',
 ];
 
 document.querySelector(".quote__button").addEventListener("click", function () {
