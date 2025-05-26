@@ -13,19 +13,26 @@ hearts.forEach((heart) => {
 });
 
 const quotes = [
-  '"Breath is the bridge which connects life to consciousness, which unites your body to your thoughts." – Thich Nhat Hanh',
+  '"You are the sky. Everything else is just the weather." — Pema Chodron',
 
   '"Deep breathing brings deep thinking, and shallow breathing brings shallow thinking." – Elsie Lincoln Benedict',
 
-  '"When the breath wanders, the mind is unsteady, but when the breath is calmed, the mind too will be still." – Hatha Yoga Pradipika',
+  '"The best way to predict the future is to create it." — Peter Drucker',
 
   '"Meditation is the secret of all growth in spiritual life and knowledge." – James Allen',
 
-  '"When meditation is mastered, the mind is unwavering like the flame of a candle in a windless place." – Bhagavad Gita',
+  '"With the new day comes new strength and new thoughts." — Eleanor Roosevelt',
 
-  '"Meditation is not a way of making your mind quiet. It is a way of entering into the quiet that is already there." – Deepak Chopra',
+  '"Life is not the amount of breaths you take. It’s the moments that take your breath away." - Hitch (2005)',
 
+  '"One small positive thought can change your whole day." — Zig Ziglar',
   '"May the force be with you"',
+  '"Never go to a doctor whose office plants have died." — Erma Bombeck',
+  '"Houston, we have a problem." — Apollo 13 (1995)',
+  '"A day without laughter is a day wasted." — Charlie Chaplin',
+  '"To infinity, and beyond!" — Buzz Lightyear',
+  '"Just keep swimming." — Dory, Finding Nemo (2003)',
+  '"Doubt kills more dreams than failure ever will." — Suzy Kassem',
 ];
 
 document.querySelector(".quote__button").addEventListener("click", function () {
@@ -69,8 +76,8 @@ let currentPhase = 0;
 let exerciseTimer;
 let animationInterval;
 let selectedDuration = 60000;
-let activeTimeout = null; 
-let isRunning = false; 
+let activeTimeout = null;
+let isRunning = false;
 let countdownTimeouts = [];
 let modeTextTimeout;
 let autoStopTimeout;
@@ -83,32 +90,29 @@ let autoStopTimeout;
 function updateBreathing() {
   const circle = document.querySelector(".breathing-circle");
   const pattern = breathingPatterns[currentMode];
-  circle.textContent = pattern.messages[currentPhase]; 
+  circle.textContent = pattern.messages[currentPhase];
 
   if (currentPhase === 0) {
-    
-    circle.style.transform = "scale(1.5)"; 
+    circle.style.transform = "scale(1.5)";
     circle.style.transition = `transform ${pattern.inhale}ms ease-in`;
   } else if (currentPhase === 1) {
-    
-    circle.style.transform = "scale(1.5)"; 
-    circle.style.transition = "none"; 
+    circle.style.transform = "scale(1.5)";
+    circle.style.transition = "none";
   } else {
-  
-    circle.style.transform = "scale(1)"; 
+    circle.style.transform = "scale(1)";
     circle.style.transition = `transform ${pattern.exhale}ms ease-out`;
   }
 }
 
 function startBreathingCycle() {
   clearTimeout(modeTextTimeout);
-  clearTimeout(autoStopTimeout); 
+  clearTimeout(autoStopTimeout);
 
   autoStopTimeout = setTimeout(() => {
     stopBreathingCycle();
     const circle = document.querySelector(".breathing-circle");
     circle.textContent = "Session timed out";
-  }, 360000); 
+  }, 360000);
 
   const circle = document.querySelector(".breathing-circle");
   circle.setAttribute("data-countdown", "true");
@@ -137,25 +141,25 @@ function startBreathingCycle() {
   );
 }
 
- function runPhase() {
-   if (!isRunning) return;
+function runPhase() {
+  if (!isRunning) return;
 
-   const pattern = breathingPatterns[currentMode];
+  const pattern = breathingPatterns[currentMode];
 
-   if (currentPhase >= 3) {
-     currentPhase = 0;
-   }
+  if (currentPhase >= 3) {
+    currentPhase = 0;
+  }
 
-   updateBreathing();
+  updateBreathing();
 
-   const durations = [pattern.inhale, pattern.hold, pattern.exhale];
-   const duration = durations[currentPhase];
+  const durations = [pattern.inhale, pattern.hold, pattern.exhale];
+  const duration = durations[currentPhase];
 
-   activeTimeout = setTimeout(() => {
-     currentPhase++;
-     runPhase();
-   }, duration);
- }
+  activeTimeout = setTimeout(() => {
+    currentPhase++;
+    runPhase();
+  }, duration);
+}
 
 modes.forEach((mode) => {
   mode.addEventListener("click", function () {
@@ -177,13 +181,12 @@ durationButtons.forEach((button) => {
 
 const stopButton = document.querySelector('[onclick="stopBreathingCycle()"]');
 stopButton.addEventListener("click", () => {
-
   stopBreathingCycle();
 });
 
 function stopBreathingCycle() {
   clearTimeout(modeTextTimeout);
-  clearTimeout(autoStopTimeout); 
+  clearTimeout(autoStopTimeout);
 
   const circle = document.querySelector(".breathing-circle");
 
